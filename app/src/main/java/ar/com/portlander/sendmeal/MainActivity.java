@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,19 +29,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Activar y desactivar CVV dependiendo del numero de la tarjeta
-        EditText numTarjeta = (EditText)findViewById(R.id.numTarjeta);
-        numTarjeta.setOnFocusChangeListener(new View.OnFocusChangeListener(){
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                EditText ccv = (EditText)findViewById(R.id.ccv);
-                if(!hasFocus && ((EditText)view).getText().length() == 22){
+        final EditText numTarjeta = (EditText)findViewById(R.id.numTarjeta);
+        final EditText ccv = (EditText)findViewById(R.id.ccv);
+        ccv.setEnabled(false);
+        numTarjeta.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                if(s.toString().length() > 0){
                     ccv.setEnabled(true);
                 }
                 else{
-                    ccv.setText(null);
                     ccv.setEnabled(false);
+                    ccv.setText(null);
                 }
             }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
         //Insertar 10 anios de vencimiento.
