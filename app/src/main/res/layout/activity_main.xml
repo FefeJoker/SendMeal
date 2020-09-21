@@ -1,18 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="@dimen/pesoSum"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/nombre"
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="@dimen/pesoElemento"
+        android:ems="10"
+        android:hint="@string/nombre"
+        android:inputType="textPersonName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:visibility="visible"
+        tools:visibility="visible"
+        android:importantForAutofill="no" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/retryPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:ems="10"
+        android:hint="@string/retry_password"
+        android:inputType="textPassword"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/tipoTarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:text="@string/tipo_tarjetas" />
+
+    <RadioGroup
+        android:id="@+id/tiposTarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/debito"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/debito" />
+
+        <RadioButton
+            android:id="@+id/credito"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/credito" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/datosTarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <EditText
+            android:id="@+id/numTarjeta"
+            android:layout_width="@dimen/dp_CBU"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/pesoElemento"
+            android:ems="10"
+            android:hint="@string/num_tarjeta"
+            android:importantForAutofill="no"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/ccv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/pesoElemento"
+            android:ems="10"
+            android:enabled="false"
+            android:hint="@string/ccv"
+            android:importantForAutofill="no"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/fechaVencimiento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:text="@string/fecha_vencimiento" />
+
+    <LinearLayout
+        android:id="@+id/vencimientoTarjeta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/meses"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/pesoElemento" />
+
+        <Spinner
+            android:id="@+id/anios"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/pesoElemento" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/cbu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:ems="10"
+        android:hint="@string/cbu"
+        android:inputType="number"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/cbuAlias"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:ems="10"
+        android:hint="@string/cbu_alias"
+        android:inputType="textPersonName"
+        android:importantForAutofill="no" />
+
+    <Switch
+        android:id="@+id/cargaIncial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:onClick="enableSeekBar"
+        android:text="@string/carga_inicial" />
+
+    <LinearLayout
+        android:id="@+id/grupoCargaInicial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/creditoInicial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/credito_inicial" />
+
+        <SeekBar
+            android:id="@+id/seekCredito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="1500" />
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/terminosCondiciones"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:onClick="terminosCheck"
+        android:text="@string/terminos_condiciones" />
+
+    <Button
+        android:id="@+id/botonRegistrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="@dimen/pesoElemento"
+        android:onClick="verificarRegistrar"
+        android:text="@string/registrar" />
+
+</LinearLayout>
