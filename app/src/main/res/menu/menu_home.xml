@@ -2,7 +2,13 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Registrarme" />
-    <item android:title="Crear Item" />
-    <item android:title="Lista de Items" />
+    <item
+        android:id="@+id/item_registrarme"
+        android:title="Registrarme" />
+    <item
+        android:id="@+id/item_crear_item"
+        android:title="Crear Item" />
+    <item
+        android:id="@+id/item_lista_items"
+        android:title="Lista de Items" />
 </menu>
