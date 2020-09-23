@@ -32,4 +32,11 @@
         <item>11</item>
         <item>12</item>
     </integer-array>
+    <string name="nuevo_plato">Nuevo Plato</string>
+    <string name="title">Título</string>
+    <string name="descrip">Descripción</string>
+    <string name="Precio">Precio</string>
+    <string name="calorias">Calorías</string>
+    <string name="Guardar">Guardar</string>
+
 </resources>

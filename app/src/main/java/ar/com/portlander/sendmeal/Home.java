@@ -40,12 +40,13 @@ public class Home extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_registrarme:
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+                Intent intent_MainActivity = new Intent(this, MainActivity.class);
+                startActivity(intent_MainActivity);
                 //METER ESTO EN UN METODO REGISTRAR
                 return true;
             case R.id.item_crear_item:
-                //
+                Intent intent_Alta_plato = new Intent(this, Alta_plato.class);
+                startActivity(intent_Alta_plato);
                 return true;
             case R.id.item_lista_items:
                 //
