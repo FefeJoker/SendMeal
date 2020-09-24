@@ -58,13 +58,14 @@
         android:hint="@string/calorias"
 
         android:inputType="numberDecimal"
-        android:onClick="crearPlato" />
+        />
 
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Guardar"
-        android:background="@color/colorButton"/>
+        android:background="@color/colorButton"
+        android:onClick="crearPlato"/>
 
 </LinearLayout>
