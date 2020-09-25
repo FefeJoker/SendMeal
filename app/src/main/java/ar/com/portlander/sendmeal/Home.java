@@ -49,7 +49,8 @@ public class Home extends AppCompatActivity {
                 startActivity(intent_Alta_plato);
                 return true;
             case R.id.item_lista_items:
-                //
+                Intent intent_Lista_plato = new Intent(this, Lista_platos.class);
+                startActivity(intent_Lista_plato);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

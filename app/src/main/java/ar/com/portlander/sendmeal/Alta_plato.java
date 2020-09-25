@@ -41,6 +41,7 @@ public class Alta_plato extends AppCompatActivity {
             calorias = Integer.parseInt(etcalorias.getText().toString());
 
             Plato plato = new Plato(titulo,descripcion,precio,calorias);
+
             Toast.makeText(this, "Plato guardado correctamente", Toast.LENGTH_SHORT).show();
 
         }else {
