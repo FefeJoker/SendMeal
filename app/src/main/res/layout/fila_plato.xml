@@ -40,6 +40,14 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/Precio"
                     android:text="Precio" />
+
+                <Button
+                    android:id="@+id/agregar_plato"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="agregarPlato"
+                    android:text="@string/agregar_plato"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>

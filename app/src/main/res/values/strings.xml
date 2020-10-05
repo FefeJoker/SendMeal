@@ -43,4 +43,8 @@
     <string name="envio">Envio</string>
     <string name="take_away">TakeAway</string>
     <string name="agregar_platos">Agregar platos</string>
+    <string name="agregar_plato">Agregar plato</string>
+    <string name="total">Total</string>
+    <string name="confirmar_pedido">Confirmar pedido</string>
+    <string name="precio_total_inicial">0</string>
 </resources>

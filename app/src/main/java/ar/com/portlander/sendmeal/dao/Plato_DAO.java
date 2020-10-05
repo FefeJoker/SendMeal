@@ -18,12 +18,19 @@ public class Plato_DAO {
             platos.add(new Plato("Guiso de Mondongo", "eeeee", 250.0,2250));
             platos.add(new Plato("Ñoquis", "eeeee", 150.0,250));
             platos.add(new Plato("Ramen", "eeeee", 100.0,50));
-            platos.add(new Plato("Guiso de Mondongo", "eeeee", 250.0,2250));
+            platos.add(new Plato("Guiso de Mon", "eeeee", 250.0,2250));
         }
     }
     public List<Plato> list(){
         iniciar();
         return this.platos;
+    }
+
+    public Plato getPlato(String titulo){
+        for(Plato p : platos){
+            if(p.getTitulo().equals(titulo)) return p;
+        }
+        return null;
     }
 
     public void add(String nombre,String descrip,Double precio,Integer calorias){
