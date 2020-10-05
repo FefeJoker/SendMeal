@@ -4,53 +4,107 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"    >
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="273dp"
+            android:background="@color/CardBackground"
+            android:orientation="horizontal"
+            >
 
             <ImageView
                 android:id="@+id/foto"
-                android:layout_width="177dp"
-                android:layout_height="187dp"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerCrop"
                 card_view:srcCompat="@drawable/plato" />
 
-            <LinearLayout
-                android:layout_width="233dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:gravity="bottom"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/titulo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/title"
-                    android:text="Titulo" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:alpha="0.84"
+                    android:background="#000000" />
 
-                <TextView
-                    android:id="@+id/precio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Precio"
-                    android:text="Precio" />
-
-                <Button
-                    android:id="@+id/agregar_plato"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="agregarPlato"
-                    android:text="@string/agregar_plato"
-                    android:visibility="gone" />
-            </LinearLayout>
+                    android:orientation="horizontal">
 
-        </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/titulo"
+                            android:layout_width="286dp"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.6"
+                            android:hint="@string/title"
+                            android:paddingLeft="8dp"
+                            android:text="Titulo"
+                            android:textColor="#FFFFFF"
+                            android:textSize="24dp"
+                            card_view:layout_constraintBottom_toTopOf="@+id/precio"
+                            tools:layout_editor_absoluteX="16dp" />
+
+                        <TextView
+                            android:id="@+id/precio"
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:alpha="0.6"
+                            android:hint="@string/Precio"
+                            android:paddingLeft="8dp"
+                            android:text="Precio"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20dp"
+                            tools:layout_editor_absoluteX="16dp"
+                            tools:layout_editor_absoluteY="220dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/agregar_plato"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:onClick="agregarPlato"
+                            android:text="@string/agregar_plato"
+                            android:textColor="@color/LightText"
+                            android:visibility="visible"
+                            android:alpha="0.8
+"
+                            android:background="@color/colorButtonDark"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>
+
