@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Lista_platos"></activity>
+        <activity android:name=".PedidoActivity"></activity>
         <activity android:name=".Alta_plato" />
         <activity android:name=".Home">
             <intent-filter>

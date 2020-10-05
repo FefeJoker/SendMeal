@@ -11,4 +11,7 @@
     <item
         android:id="@+id/item_lista_items"
         android:title="Lista de Items" />
+    <item
+        android:id="@+id/item_nuevo_pedido"
+        android:title="Nuevo Pedido" />
 </menu>

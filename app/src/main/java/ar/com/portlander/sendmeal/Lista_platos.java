@@ -1,19 +1,22 @@
 package ar.com.portlander.sendmeal;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-
-import ar.com.portlander.sendmeal.dao.Plato_DAO;
 import ar.com.portlander.sendmeal.adapters.PlatosRecyclerAdapter;
+import ar.com.portlander.sendmeal.dao.Plato_DAO;
 
 public class Lista_platos extends AppCompatActivity {
     Plato_DAO daoplatos;
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private PlatosRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -38,5 +38,9 @@
     <string name="Precio">Precio</string>
     <string name="calorias">Calorías</string>
     <string name="Guardar">Guardar</string>
-
+    <string name="calle">Calle</string>
+    <string name="numero">Numero</string>
+    <string name="envio">Envio</string>
+    <string name="take_away">TakeAway</string>
+    <string name="agregar_platos">Agregar platos</string>
 </resources>
