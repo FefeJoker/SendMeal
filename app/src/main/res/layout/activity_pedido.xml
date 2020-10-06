@@ -101,6 +101,7 @@
         android:id="@+id/confirmar_pedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="confirmarPedido"
         android:text="@string/confirmar_pedido" />
 
 </LinearLayout>

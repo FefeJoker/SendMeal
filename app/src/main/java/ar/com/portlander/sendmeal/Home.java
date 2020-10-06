@@ -52,10 +52,6 @@ public class Home extends AppCompatActivity {
                 Intent intent_Lista_plato = new Intent(this, Lista_platos.class);
                 startActivity(intent_Lista_plato);
                 return true;
-            case R.id.item_nuevo_pedido:
-                Intent intent_nuevo_pedido = new Intent(this, PedidoActivity.class);
-                startActivity(intent_nuevo_pedido);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

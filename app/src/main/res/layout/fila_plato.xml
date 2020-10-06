@@ -90,14 +90,13 @@
                             android:id="@+id/agregar_plato"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:onClick="agregarPlato"
-                            android:text="@string/agregar_plato"
-                            android:textColor="@color/LightText"
-                            android:visibility="visible"
                             android:alpha="0.8
 "
                             android:background="@color/colorButtonDark"
-                            />
+                            android:onClick="agregarPlato"
+                            android:text="@string/agregar_plato"
+                            android:textColor="@color/LightText"
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 
