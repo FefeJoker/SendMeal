@@ -1,9 +1,15 @@
 package ar.com.portlander.sendmeal.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Plato {
+    @PrimaryKey(autoGenerate = true)
     private String titulo, descripcion;
     private Double precio;
     private Integer calorias;
+    Long id;
 
     public Plato(String titulo, String descripcion, Double precio, Integer calorias) {
         this.titulo = titulo;
@@ -42,5 +48,12 @@ public class Plato {
 
     public void setCalorias(Integer calorias) {
         this.calorias = calorias;
+    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
