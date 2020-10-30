@@ -84,7 +84,7 @@ public class PlatosRecyclerAdapter extends RecyclerView.Adapter<PlatosRecyclerAd
         Float auxPrecio = plato.getPrecio()==null? 0.0F : plato.getPrecio().floatValue();
         //Log.d(PlatoAdapter.class.getName(), plato.getTitulo()+" ON plato.getCalificacion!!!!(): "+plato.getCalificacion()+ " - "+auxCalificacion);
 
-        platoHolder.precio.setText(auxPrecio.toString());
+        platoHolder.precio.setText("$ "+auxPrecio.toString());
 
 
     }
