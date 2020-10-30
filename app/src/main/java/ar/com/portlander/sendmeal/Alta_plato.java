@@ -8,9 +8,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ar.com.portlander.sendmeal.model.Plato;
+import java.util.List;
 
-public class Alta_plato extends AppCompatActivity {
+import ar.com.portlander.sendmeal.model.Plato;
+import ar.com.portlander.sendmeal.persistance.AppRepository;
+
+public class Alta_plato extends AppCompatActivity implements AppRepository.OnResultCallback{
     private String titulo, descripcion;
     private Double precio;
     private Integer calorias;
@@ -41,13 +44,19 @@ public class Alta_plato extends AppCompatActivity {
             calorias = Integer.parseInt(etcalorias.getText().toString());
 
             Plato plato = new Plato(titulo,descripcion,precio,calorias);
-
-            Toast.makeText(this, "Plato guardado correctamente", Toast.LENGTH_SHORT).show();
+            AppRepository ar = new AppRepository(this.getApplication(),this);
+            ar.insertar(plato);
+            //Toast.makeText(this, "Plato guardado correctamente", Toast.LENGTH_SHORT).show();
 
         }else {
+
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
 
 
+    }
+    @Override
+    public void onResult(List result) {
+        Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
     }
 }

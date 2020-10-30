@@ -31,6 +31,7 @@ import ar.com.portlander.sendmeal.adapters.NuevoPedidoRecyclerAdapter;
 import ar.com.portlander.sendmeal.adapters.PlatosRecyclerAdapterForNuevoPedido;
 import ar.com.portlander.sendmeal.dao.Plato_DAO;
 import ar.com.portlander.sendmeal.model.Plato;
+import ar.com.portlander.sendmeal.persistance.AppRepository;
 
 public class PedidoActivity extends AppCompatActivity {
     private List<Plato> nuevo_pedido = new ArrayList<Plato>();
@@ -122,6 +123,7 @@ public class PedidoActivity extends AppCompatActivity {
             auxExecutor.schedule(auxRunnable,5,TimeUnit.SECONDS);
         }
         else{
+
             Toast.makeText(this , message, Toast.LENGTH_SHORT).show();
         }
 
