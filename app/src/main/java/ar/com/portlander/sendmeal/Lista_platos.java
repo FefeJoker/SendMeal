@@ -2,11 +2,9 @@ package ar.com.portlander.sendmeal;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,10 +49,12 @@ public class Lista_platos extends AppCompatActivity {
 
         // specify an adapter (see also next example)
         if(getCallingActivity() != null){
+            findViewById(R.id.tb_lista_plato).setVisibility(Toolbar.GONE);
             mAdapter = new PlatosRecyclerAdapterForNuevoPedido(daoplatos.list(), this);
             recyclerView.setAdapter(mAdapter);
         }
         else{
+            findViewById(R.id.tb_lista_plato).setVisibility(Toolbar.VISIBLE);
             mAdapter = new PlatosRecyclerAdapter(daoplatos.list(),this);
             recyclerView.setAdapter(mAdapter);
         }

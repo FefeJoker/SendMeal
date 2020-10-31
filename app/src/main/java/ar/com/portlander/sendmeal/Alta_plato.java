@@ -3,6 +3,7 @@ package ar.com.portlander.sendmeal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,9 +45,9 @@ public class Alta_plato extends AppCompatActivity implements AppRepository.OnRes
             calorias = Integer.parseInt(etcalorias.getText().toString());
 
             Plato plato = new Plato(titulo,descripcion,precio,calorias);
+
             AppRepository ar = new AppRepository(this.getApplication(),this);
             ar.insertar(plato);
-            //Toast.makeText(this, "Plato guardado correctamente", Toast.LENGTH_SHORT).show();
 
         }else {
 
@@ -56,7 +57,16 @@ public class Alta_plato extends AppCompatActivity implements AppRepository.OnRes
 
     }
     @Override
+    public void onInsert(){
+        Toast.makeText(this, "Plato guardado correctamente", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResult(Object result){
+
+    }
+
+    @Override
     public void onResult(List result) {
-        Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
     }
 }

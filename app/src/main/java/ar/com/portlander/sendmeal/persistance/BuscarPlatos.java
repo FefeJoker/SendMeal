@@ -7,7 +7,7 @@ import java.util.List;
 import ar.com.portlander.sendmeal.dao.PlatoDao;
 import ar.com.portlander.sendmeal.model.Plato;
 
-class BuscarPlatos extends AsyncTask<String, Void, List<Plato>> {
+public class BuscarPlatos extends AsyncTask<String, Void, List<Plato>> {
 
     private PlatoDao dao;
     private OnPlatoResultCallback callback;

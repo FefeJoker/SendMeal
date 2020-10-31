@@ -5,5 +5,6 @@ import java.util.List;
 import ar.com.portlander.sendmeal.model.Plato;
 
 interface OnPlatoResultCallback {
-    void onResult(List<Plato> plato);
+    void onResult(List<Plato> platos);
+    void onResult(Plato plato);
 }

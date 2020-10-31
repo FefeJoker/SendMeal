@@ -5,16 +5,20 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import ar.com.portlander.sendmeal.dao.PedidoDao;
 import ar.com.portlander.sendmeal.dao.PlatoDao;
+import ar.com.portlander.sendmeal.model.Pedido;
 import ar.com.portlander.sendmeal.model.Plato;
 
-@Database(entities = {Plato.class}, version = 1)
+@Database(entities = {Plato.class/*, Pedido.class*/}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract PlatoDao platoDao();
+    //public abstract PedidoDao pedidoDao();
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 1;

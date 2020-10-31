@@ -22,7 +22,7 @@ public interface PlatoDao {
     void actualizar(Plato plato);
 
     @Query("SELECT * FROM plato WHERE id = :id LIMIT 1")
-    Plato buscar(String id);
+    Plato buscar(Long id);
 
     @Query("SELECT * FROM plato")
     List<Plato> buscarTodos();
