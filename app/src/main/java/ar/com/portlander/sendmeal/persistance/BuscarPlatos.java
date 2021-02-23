@@ -10,9 +10,9 @@ import ar.com.portlander.sendmeal.model.Plato;
 public class BuscarPlatos extends AsyncTask<String, Void, List<Plato>> {
 
     private PlatoDao dao;
-    private OnPlatoResultCallback callback;
+    private AppRepository.OnResultCallback callback;
 
-    public BuscarPlatos(PlatoDao dao, OnPlatoResultCallback context) {
+    public BuscarPlatos(PlatoDao dao, AppRepository.OnResultCallback context) {
         this.dao = dao;
         this.callback = context;
     }

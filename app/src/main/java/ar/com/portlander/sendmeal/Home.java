@@ -11,12 +11,26 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.util.List;
+
+import ar.com.portlander.sendmeal.model.Plato;
+import ar.com.portlander.sendmeal.services.PlatoService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
@@ -49,8 +63,8 @@ public class Home extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.item_registrarme:
                 Intent intent_MainActivity = new Intent(this, MainActivity.class);
-                startActivity(intent_MainActivity);
-                //METER ESTO EN UN METODO REGISTRAR
+                aber();
+                //startActivity(intent_MainActivity);
                 return true;
             case R.id.item_crear_item:
                 Intent intent_Alta_plato = new Intent(this, Alta_plato.class);
@@ -90,5 +104,34 @@ public class Home extends AppCompatActivity {
     public void registrarme(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void aber(){
+        Gson gson = new GsonBuilder().setLenient().create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:3001/")
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        PlatoService platoService = retrofit.create(PlatoService.class);
+
+        Call<List<Plato>> callPlatos = platoService.getPlatoList();
+
+        callPlatos.enqueue(
+                new Callback<List<Plato>>() {
+                    @Override
+                    public void onResponse(Call<List<Plato>> call, Response<List<Plato>> response) {
+                        if (response.code() == 200) {
+                            Log.d("DEBUG", "Returno Exitoso");
+                            Log.d("PLATO", response.body().get(0).getTitulo());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Plato>> call, Throwable t) {
+                        Log.d("DEBUG", t.getMessage());
+                    }
+                }
+        );
+
     }
 }

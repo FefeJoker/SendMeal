@@ -11,6 +11,7 @@ public class Plato {
     private Double precio;
     private Integer calorias;
 
+    public Plato(){}
 
     public Plato(String titulo, String descripcion, Double precio, Integer calorias) {
         this.titulo = titulo;

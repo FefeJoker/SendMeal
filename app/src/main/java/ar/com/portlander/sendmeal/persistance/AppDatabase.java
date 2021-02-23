@@ -15,10 +15,11 @@ import ar.com.portlander.sendmeal.dao.PlatoDao;
 import ar.com.portlander.sendmeal.model.Pedido;
 import ar.com.portlander.sendmeal.model.Plato;
 
-@Database(entities = {Plato.class/*, Pedido.class*/}, version = 1)
+@Database(entities = {Plato.class, Pedido.class}, version = 1)
+@TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract PlatoDao platoDao();
-    //public abstract PedidoDao pedidoDao();
+    public abstract PedidoDao pedidoDao();
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 1;

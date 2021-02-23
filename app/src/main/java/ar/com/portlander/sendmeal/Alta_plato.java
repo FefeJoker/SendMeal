@@ -9,10 +9,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.util.List;
 
 import ar.com.portlander.sendmeal.model.Plato;
 import ar.com.portlander.sendmeal.persistance.AppRepository;
+import ar.com.portlander.sendmeal.services.PlatoService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Alta_plato extends AppCompatActivity implements AppRepository.OnResultCallback{
     private String titulo, descripcion;
@@ -48,7 +57,17 @@ public class Alta_plato extends AppCompatActivity implements AppRepository.OnRes
 
             AppRepository ar = new AppRepository(this.getApplication(),this);
             ar.insertar(plato);
+            ////////////////////////////////
+            Gson gson = new GsonBuilder().setLenient().create();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://10.0.2.2:3001/")
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            PlatoService platoService = retrofit.create(PlatoService.class);
 
+            platoService.createPlato(plato);
+
+            ////////////////////////////////
         }else {
 
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

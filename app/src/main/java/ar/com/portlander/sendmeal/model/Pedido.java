@@ -15,6 +15,8 @@ public class Pedido {
     private boolean envio; //true si es envio, false si es TakeAway
     private List<Plato> platos_pedido;
 
+    public Pedido(){}
+
     public Long getId() {
         return id;
     }

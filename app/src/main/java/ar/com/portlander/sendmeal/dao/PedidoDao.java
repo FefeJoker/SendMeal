@@ -10,7 +10,7 @@ import java.util.List;
 
 import ar.com.portlander.sendmeal.model.Pedido;
 
-//@Dao
+@Dao
 public interface PedidoDao {
     @Insert
     void insertar(Pedido p);
@@ -22,7 +22,7 @@ public interface PedidoDao {
     void actualizar(Pedido p);
 
     @Query("SELECT * FROM pedido WHERE id = :id LIMIT 1")
-    Pedido buscar(String id);
+    Pedido buscar(Long id);
 
     @Query("SELECT * FROM pedido")
     List<Pedido> buscarTodos();

@@ -3,14 +3,9 @@ package ar.com.portlander.sendmeal;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,21 +14,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import ar.com.portlander.sendmeal.adapters.NuevoPedidoRecyclerAdapter;
-import ar.com.portlander.sendmeal.adapters.PlatosRecyclerAdapterForNuevoPedido;
 import ar.com.portlander.sendmeal.dao.Plato_DAO;
+import ar.com.portlander.sendmeal.model.Pedido;
 import ar.com.portlander.sendmeal.model.Plato;
 import ar.com.portlander.sendmeal.persistance.AppRepository;
 
-public class PedidoActivity extends AppCompatActivity {
+public class PedidoActivity extends AppCompatActivity implements AppRepository.OnResultCallback<Pedido> {
     private List<Plato> nuevo_pedido = new ArrayList<Plato>();
     private Plato_DAO daoPlato = new Plato_DAO();
 
@@ -121,11 +113,36 @@ public class PedidoActivity extends AppCompatActivity {
                 }
             };
             auxExecutor.schedule(auxRunnable,5,TimeUnit.SECONDS);
+
+            Pedido pedido = new Pedido();
+            pedido.setCalle(auxCalle.getText().toString());
+            pedido.setEnvio(((RadioButton)findViewById(R.id.envio)).isChecked());
+            pedido.setMail(auxEmail.getText().toString());
+            pedido.setNro(Integer.valueOf(auxCalleNumero.getText().toString()));
+            pedido.setPlatos_pedido(nuevo_pedido);
+
+
+            AppRepository repository = new AppRepository(this.getApplication(), this);
+            repository.insertar(pedido);
         }
         else{
 
             Toast.makeText(this , message, Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    @Override
+    public void onResult(List<Pedido> result) {
+
+    }
+
+    @Override
+    public void onResult(Pedido result) {
+
+    }
+
+    @Override
+    public void onInsert() {
     }
 }

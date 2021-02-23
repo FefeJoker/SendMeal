@@ -10,15 +10,15 @@ import ar.com.portlander.sendmeal.dao.PlatoDao;
 import ar.com.portlander.sendmeal.model.Pedido;
 import ar.com.portlander.sendmeal.model.Plato;
 
-public class AppRepository implements OnPlatoResultCallback {
+public class AppRepository {
     private PlatoDao platoDao;
-    //private PedidoDao pedidoDao;
+    private PedidoDao pedidoDao;
     private OnResultCallback callback;
 
     public AppRepository(Application application, OnResultCallback context){
         AppDatabase db = AppDatabase.getInstance(application);
         platoDao = db.platoDao();
-        //pedidoDao = db.pedidoDao();
+        pedidoDao = db.pedidoDao();
         callback = context;
     }
 
@@ -31,14 +31,14 @@ public class AppRepository implements OnPlatoResultCallback {
         });
     }
 
-    /*public void insertar(final Pedido pedido){
+    public void insertar(final Pedido pedido){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 pedidoDao.insertar(pedido);
             }
         });
-    }*/
+    }
 
     public void borrar(final Plato plato){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
@@ -49,14 +49,14 @@ public class AppRepository implements OnPlatoResultCallback {
         });
     }
 
-    /*public void borrar(final Pedido pedido){
+    public void borrar(final Pedido pedido){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 pedidoDao.borrar(pedido);
             }
         });
-    }*/
+    }
 
     public void actualizar(final Plato plato){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
@@ -67,32 +67,25 @@ public class AppRepository implements OnPlatoResultCallback {
         });
     }
 
-    /*public void actualizar(final Pedido pedido){
+    public void actualizar(final Pedido pedido){
         AppDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
                 pedidoDao.actualizar(pedido);
             }
         });
-    }*/
-
-    public void buscar(Long id) {
-        new BuscarPlatoById(platoDao, this).execute(id);
     }
 
-    public void buscarTodos() {
-        new BuscarPlatos(platoDao, this).execute();
+    public void buscarPlato(Long id) {
+        new BuscarPlatoById(platoDao, callback).execute(id);
     }
 
-    @Override
-    public void onResult(List<Plato> platos) {
-        Log.d("DEBUG", "Plato found");
-        callback.onResult(platos);
+    public void buscarTodosPlato() {
+        new BuscarPlatos(platoDao, callback).execute();
     }
 
-    @Override
-    public void onResult(Plato plato){
-        callback.onResult(plato);
+    public void buscarPedido(Long id) {
+        new BuscarPedidoById(pedidoDao, callback).execute(id);
     }
 
     public interface OnResultCallback<T> {
