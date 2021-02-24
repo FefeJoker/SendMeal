@@ -2,6 +2,7 @@ package ar.com.portlander.sendmeal.persistance;
 
 import androidx.room.TypeConverter;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -23,5 +24,19 @@ public class Converters {
         Gson gson = new Gson();
         String json = gson.toJson(list);
         return json;
+    }
+
+    @TypeConverter
+    public static LatLng toLatLng(String value) {
+        String[] split = value.split(";");
+        LatLng result = new LatLng(Double.valueOf(split[0]), Double.valueOf(split[1]));
+        return result;
+    }
+
+    @TypeConverter
+    public static String fromLatLng(LatLng list) {
+        if(list == null)    return null;
+        String result = Double.valueOf(list.latitude).toString() + ";" + Double.valueOf(list.longitude).toString();
+        return result;
     }
 }

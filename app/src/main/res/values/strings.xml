@@ -46,6 +46,7 @@
     <string name="agregar_plato">Agregar plato</string>
     <string name="total">Total</string>
     <string name="confirmar_pedido">Confirmar pedido</string>
+    <string name="confirmar_ubicacion">Confirmar ubicacion</string>
     <string name="precio_total_inicial">0</string>
     <string name="channel_name">Notification Channel</string>
     <string name="channel_description">Notification Channel Description</string>

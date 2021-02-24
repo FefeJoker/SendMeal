@@ -4,6 +4,8 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 @Entity
@@ -13,6 +15,7 @@ public class Pedido {
     private String mail, calle;
     private int nro;
     private boolean envio; //true si es envio, false si es TakeAway
+    private LatLng ubicacion;
     private List<Plato> platos_pedido;
 
     public Pedido(){}
@@ -63,6 +66,15 @@ public class Pedido {
 
     public void setPlatos_pedido(List<Plato> platos_pedido) {
         this.platos_pedido = platos_pedido;
+    }
+
+
+    public LatLng getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(LatLng ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
 }

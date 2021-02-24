@@ -98,6 +98,13 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="confirmarUbicacion"
+        android:text="@string/confirmar_ubicacion" />
+
+    <Button
         android:id="@+id/confirmar_pedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
