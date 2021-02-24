@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -18,10 +19,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
 
@@ -31,9 +33,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap myMap;
     private LatLng posicionLocal;
     private LatLng posicionOriginal;
-    private MarkerOptions localMarker;
-    private MarkerOptions originalMarker;
-    private PolylineOptions polylineOptions;
+    private Marker localMarker;
+    private Marker originalMarker;
+    private Polyline polyline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         myMap=googleMap;
+        myMap.setOnMapLongClickListener(this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -59,6 +62,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         }
         myMap.setMyLocationEnabled(true);
         organizarMapa();
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 23: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    myMap.setMyLocationEnabled(true);
+                    organizarMapa();
+                } else {}
+                return;
+            }
+        }
     }
 
 
@@ -81,11 +99,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         generarLocal();
 
-        localMarker = new MarkerOptions();
+        MarkerOptions localMarker = new MarkerOptions();
         localMarker.position(posicionLocal);
         localMarker.title("Local");
         localMarker.icon(BitmapDescriptorFactory.defaultMarker(69));
-        myMap.addMarker(localMarker);
+        this.localMarker = myMap.addMarker(localMarker);
+
+        MarkerOptions originalMarker = new MarkerOptions();
+        originalMarker.position(posicionOriginal);
+        originalMarker.title("Envio");
+        this.originalMarker = myMap.addMarker(originalMarker);
     }
 
     private void generarLocal(){
@@ -108,18 +131,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapLongClick(LatLng latLng) {
+        this.originalMarker.remove();
         posicionOriginal = latLng;
-        originalMarker = new MarkerOptions();
+        MarkerOptions originalMarker = new MarkerOptions();
         originalMarker.position(posicionOriginal);
         originalMarker.title("Envio");
-        myMap.addMarker(originalMarker);
+        this.originalMarker = myMap.addMarker(originalMarker);
 
-        polylineOptions = new PolylineOptions();
+        if(polyline != null)    polyline.remove();
+        PolylineOptions polylineOptions = new PolylineOptions();
         polylineOptions.color(0x66FF0000);
 
         polylineOptions.add(posicionOriginal, posicionLocal);
 
-        myMap.addPolyline(polylineOptions);
+        Toast.makeText(this, "asd", Toast.LENGTH_SHORT).show();
+
+        polyline = myMap.addPolyline(polylineOptions);
     }
 
     public void confirmarUbicacion(View view){

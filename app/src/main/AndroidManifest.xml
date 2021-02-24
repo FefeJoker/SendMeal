@@ -19,7 +19,6 @@
         <activity android:name=".Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,5 +27,4 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAaivE0L-cFcCIFlRIrihv9qcDFmaoeX60" />
     </application>
-
 </manifest>
