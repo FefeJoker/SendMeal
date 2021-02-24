@@ -12,12 +12,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.com.portlander.sendmeal.adapters.PlatosRecyclerAdapter;
 import ar.com.portlander.sendmeal.adapters.PlatosRecyclerAdapterForNuevoPedido;
 import ar.com.portlander.sendmeal.dao.Plato_DAO;
+import ar.com.portlander.sendmeal.model.Plato;
+import ar.com.portlander.sendmeal.persistance.AppRepository;
 
-public class Lista_platos extends AppCompatActivity {
-    Plato_DAO daoplatos;
+public class Lista_platos extends AppCompatActivity implements AppRepository.OnResultCallback<Plato>{
+    //Plato_DAO daoplatos;
+
+    List<Plato> platos;
 
     private Toolbar tb_lista_plato;
 
@@ -38,7 +45,7 @@ public class Lista_platos extends AppCompatActivity {
             actionbar.setDisplayHomeAsUpEnabled(true);
         }
 
-        daoplatos = new Plato_DAO();
+        //daoplatos = new Plato_DAO();
         recyclerView = (RecyclerView) findViewById(R.id.rv);
 
         recyclerView.setHasFixedSize(true);
@@ -48,16 +55,9 @@ public class Lista_platos extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        if(getCallingActivity() != null){
-            findViewById(R.id.tb_lista_plato).setVisibility(Toolbar.GONE);
-            mAdapter = new PlatosRecyclerAdapterForNuevoPedido(daoplatos.list(), this);
-            recyclerView.setAdapter(mAdapter);
-        }
-        else{
-            findViewById(R.id.tb_lista_plato).setVisibility(Toolbar.VISIBLE);
-            mAdapter = new PlatosRecyclerAdapter(daoplatos.list(),this);
-            recyclerView.setAdapter(mAdapter);
-        }
+
+        AppRepository repository = new AppRepository(this.getApplication(), this);
+        repository.buscarTodosPlato();
 
     }
     @Override
@@ -78,6 +78,32 @@ public class Lista_platos extends AppCompatActivity {
         inflater.inflate(R.menu.menu_lista_platos,menu);
 
         return true;
+
+    }
+
+    @Override
+    public void onResult(List<Plato> result) {
+        platos = result;
+
+        if(getCallingActivity() != null){
+            findViewById(R.id.tb_lista_plato).setVisibility(Toolbar.GONE);
+            mAdapter = new PlatosRecyclerAdapterForNuevoPedido(platos, this);
+            recyclerView.setAdapter(mAdapter);
+        }
+        else{
+            findViewById(R.id.tb_lista_plato).setVisibility(Toolbar.VISIBLE);
+            mAdapter = new PlatosRecyclerAdapter(platos,this);
+            recyclerView.setAdapter(mAdapter);
+        }
+    }
+
+    @Override
+    public void onResult(Plato result) {
+
+    }
+
+    @Override
+    public void onInsert() {
 
     }
 }

@@ -1,5 +1,7 @@
 package ar.com.portlander.sendmeal.persistance;
 
+import android.net.Uri;
+
 import androidx.room.TypeConverter;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -38,5 +40,15 @@ public class Converters {
         if(list == null)    return null;
         String result = Double.valueOf(list.latitude).toString() + ";" + Double.valueOf(list.longitude).toString();
         return result;
+    }
+
+    @TypeConverter
+    public static Uri toUri(String path) {
+        return Uri.parse(path);
+    }
+
+    @TypeConverter
+    public static String fromUri(Uri path) {
+        return path.toString();
     }
 }

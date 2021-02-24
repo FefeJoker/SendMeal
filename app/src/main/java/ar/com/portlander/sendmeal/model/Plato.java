@@ -1,5 +1,7 @@
 package ar.com.portlander.sendmeal.model;
 
+import android.net.Uri;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,6 +12,7 @@ public class Plato {
     private String titulo, descripcion;
     private Double precio;
     private Integer calorias;
+    private Uri uri;
 
     public Plato(){}
 
@@ -58,4 +61,13 @@ public class Plato {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
+    }
+
 }

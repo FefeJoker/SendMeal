@@ -27,9 +27,10 @@ import ar.com.portlander.sendmeal.model.Pedido;
 import ar.com.portlander.sendmeal.model.Plato;
 import ar.com.portlander.sendmeal.persistance.AppRepository;
 
-public class PedidoActivity extends AppCompatActivity implements AppRepository.OnResultCallback<Pedido> {
-    private List<Plato> nuevo_pedido = new ArrayList<Plato>();
-    private Plato_DAO daoPlato = new Plato_DAO();
+public class PedidoActivity extends AppCompatActivity implements AppRepository.OnResultCallback<Plato>{
+    private final List<Plato> nuevo_pedido = new ArrayList<Plato>();
+    private final Plato_DAO daoPlato = new Plato_DAO();
+    private AppRepository repository;
 
     private static final Integer REQUEST_CODE=7;
 
@@ -60,6 +61,7 @@ public class PedidoActivity extends AppCompatActivity implements AppRepository.O
         // specify an adapter (see also next example)
         mAdapter = new NuevoPedidoRecyclerAdapter(nuevo_pedido, this);
         recyclerView.setAdapter(mAdapter);
+        repository = new AppRepository(this.getApplication(), this);
     }
 
     @Override
@@ -80,14 +82,7 @@ public class PedidoActivity extends AppCompatActivity implements AppRepository.O
         super.onActivityResult(requestCode, resultCode, data);
         if(data == null)    return;
         if(requestCode == 1 ){
-            Plato plato = daoPlato.getPlato(data.getStringExtra("NOMBRE"));
-
-            nuevo_pedido.add(plato);
-            mAdapter.notifyDataSetChanged();
-
-            TextView auxTextView = findViewById(R.id.precio_total);
-            String precioNuevo = Double.toString(Float.valueOf(auxTextView.getText().toString()) + plato.getPrecio());
-            auxTextView.setText(precioNuevo);
+            repository.buscarPlato(data.getLongExtra("ID", 0));
         }
         else if(requestCode == REQUEST_CODE){
             localization = data.getExtras().getParcelable("localization");
@@ -138,7 +133,7 @@ public class PedidoActivity extends AppCompatActivity implements AppRepository.O
             pedido.setUbicacion(localization);
 
 
-            AppRepository repository = new AppRepository(this.getApplication(), this);
+            repository = new AppRepository(this.getApplication(), this);
             repository.insertar(pedido);
         }
         else{
@@ -148,13 +143,18 @@ public class PedidoActivity extends AppCompatActivity implements AppRepository.O
     }
 
     @Override
-    public void onResult(List<Pedido> result) {
+    public void onResult(List<Plato> result) {
 
     }
 
     @Override
-    public void onResult(Pedido result) {
+    public void onResult(Plato plato) {
+        nuevo_pedido.add(plato);
+        mAdapter.notifyDataSetChanged();
 
+        TextView auxTextView = findViewById(R.id.precio_total);
+        String precioNuevo = Double.toString(Float.valueOf(auxTextView.getText().toString()) + plato.getPrecio());
+        auxTextView.setText(precioNuevo);
     }
 
     @Override

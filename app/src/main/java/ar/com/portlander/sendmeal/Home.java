@@ -1,5 +1,6 @@
 package ar.com.portlander.sendmeal;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,7 +44,7 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 
 public class Home extends AppCompatActivity {
-
+    private FirebaseAuth mAuth;
     private Toolbar tb_home;
     private NotificationChannel notificationChannel;
     private MenuItem menu;
@@ -57,6 +65,29 @@ public class Home extends AppCompatActivity {
             actionbar.setDisplayHomeAsUpEnabled(true);
         }
 
+        //FirebaseApp.initializeApp(this.getApplicationContext());
+
+        mAuth = FirebaseAuth.getInstance();
+
+        signInAnonymously();
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            // Error
+                            return;
+                        }
+
+                        // FCM token
+                        String token = task.getResult();
+
+                        // Imprimirlo en un toast y en logs
+                        Log.d("-------------------", token);
+                        Toast.makeText(Home.this, token, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -133,5 +164,23 @@ public class Home extends AppCompatActivity {
                 }
         );
 
+    }
+    private void signInAnonymously() {
+        mAuth.signInAnonymously()
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Exito
+                            Log.d("TAG", "signInAnonymously:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // Error
+                            Log.w("TAG", "signInAnonymously:failure", task.getException());
+                            //Toast.makeText(AnonymousAuthActivity.this, "Authentication failed.",
+                            // Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

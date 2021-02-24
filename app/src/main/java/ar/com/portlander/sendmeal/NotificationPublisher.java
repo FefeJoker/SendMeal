@@ -15,7 +15,7 @@ public class NotificationPublisher extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "1");
-        builder.setSmallIcon(R.drawable.plato); //Buscar un iconito lindo.
+        builder.setSmallIcon(R.drawable.plato);
         builder.setContentTitle("SendMeal");
         builder.setContentText(intent.getStringExtra("MENSAJE"));
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);

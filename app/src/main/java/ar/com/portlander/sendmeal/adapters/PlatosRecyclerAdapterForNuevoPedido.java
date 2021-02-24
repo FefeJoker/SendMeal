@@ -1,6 +1,9 @@
 package ar.com.portlander.sendmeal.adapters;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +12,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -19,8 +28,8 @@ import ar.com.portlander.sendmeal.R;
 import ar.com.portlander.sendmeal.model.Plato;
 
 public class PlatosRecyclerAdapterForNuevoPedido extends RecyclerView.Adapter<PlatosRecyclerAdapterForNuevoPedido.PlatoViewHolder> {
-    private List<Plato> mDataset;
-    private AppCompatActivity activity;
+    private final List<Plato> mDataset;
+    private final AppCompatActivity activity;
     // Provide a suitable constructor (depends on the kind of dataset)
     public PlatosRecyclerAdapterForNuevoPedido(List<Plato> myDataset, AppCompatActivity act) {
         mDataset = myDataset;
@@ -37,6 +46,7 @@ public class PlatosRecyclerAdapterForNuevoPedido extends RecyclerView.Adapter<Pl
         TextView precio;
         ImageView imagen;
         Button boton;
+        Long id;
 
         public PlatoViewHolder(View v){
             super(v);
@@ -51,7 +61,9 @@ public class PlatosRecyclerAdapterForNuevoPedido extends RecyclerView.Adapter<Pl
                 public void onClick(View view){
                     String auxNombre = titulo.getText().toString();
                     Intent intent = new Intent();
-                    intent.putExtra("NOMBRE", auxNombre);
+                    intent.putExtra("ID", id);
+
+                    Log.d("--------------------", id.toString());
                     activity.setResult(1, intent);
                     activity.finish();
                 }
@@ -91,6 +103,28 @@ public class PlatosRecyclerAdapterForNuevoPedido extends RecyclerView.Adapter<Pl
         //Log.d(PlatoAdapter.class.getName(), plato.getTitulo()+" ON plato.getCalificacion!!!!(): "+plato.getCalificacion()+ " - "+auxCalificacion);
 
         platoHolder.precio.setText(auxPrecio.toString());
+        platoHolder.id = plato.getId();
+        StorageReference gsReference = FirebaseStorage.getInstance().getReferenceFromUrl(plato.getUri().toString());
+
+        final long THREE_MEGABYTE = 3 * 1024 * 1024;
+        gsReference.getBytes(THREE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Exito
+                Bitmap bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                DisplayMetrics dm = new DisplayMetrics();
+                activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+                platoHolder.imagen.setMinimumHeight(dm.heightPixels);
+                platoHolder.imagen.setMinimumWidth(dm.widthPixels);
+                platoHolder.imagen.setImageBitmap(bm);
+                platoHolder.imagen.invalidate();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+            }
+        });
 
 
     }

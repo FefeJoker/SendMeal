@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "96255950287",
+    "project_id": "omega-clarity-304920",
+    "storage_bucket": "omega-clarity-304920.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96255950287:android:b0bfd94386683eee7ee6ba",
+        "android_client_info": {
+          "package_name": "ar.com.portlander.sendmeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96255950287-eg4hohksh31pgrs449sfadlcuu5uf739.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9Z3OcDuSxTHvZonIfo3LmPDrlVyWsDzc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96255950287-eg4hohksh31pgrs449sfadlcuu5uf739.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
